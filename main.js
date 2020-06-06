@@ -47,6 +47,12 @@ function setup() {
     addVideo(call);
   });
 
+  createButton("切断").mousePressed(() => {
+    // ボタンが押されたら
+    const callId = window.location.reload();
+  });
+
+
   // // 相手から呼び出された実行される
   peer.on("call", (call) => {
     console.log("be called!");
@@ -81,6 +87,6 @@ function draw() {
   // background(255);
   image(hawaiiImg, 0, 0, 640, 480);
   //それぞれもしビデオの準備ができていたらキャンバスに半分の大きさで描く
-  image(mySegmentImg, mouseX, mouseY, 320, 240);
+  image(mySegmentImg, mouseX, mouseY, 160, 120);
   if (thSegmentImg) image(thSegmentImg, 0, 0, 320, 240);
 }
