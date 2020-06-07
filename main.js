@@ -14,17 +14,8 @@ function setup() {
   createCanvas(640, 480); //canvas作成
 
   //自分用カメラ設定と背景透過画像の取得
+  capture = createCapture({ video: { width: 640, height: 480 }, audio: false });
   navigator.mediaDevices.getUserMedia({audio: true})
-  .then(function (stream) {
-    // Success
-    $('#my-video').get(0).srcObject = stream;
-    localStream = stream;
-}).catch(function (error) {
-    // Error
-    console.error('mediaDevice.getUserMedia() error:', error);
-    return;
-});
-  capture = createCapture({ video: { width: 640, height: 480 },});
   capture.hide(); //キャンバスで描くので非表示
   mySegmentImg = createImage(640, 480);
   uNet.segment(capture, gotResult);
