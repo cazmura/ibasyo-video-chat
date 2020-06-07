@@ -14,8 +14,11 @@ function setup() {
   createCanvas(640, 480); //canvas作成
 
   //自分用カメラ設定と背景透過画像の取得
+
   capture = createCapture({ video: { width: 640, height: 480 }, audio: false }); 
   capture.volume(0);
+
+
   capture.hide(); //キャンバスで描くので非表示
   mySegmentImg = createImage(640, 480);
   uNet.segment(capture, gotResult);
@@ -25,6 +28,17 @@ function setup() {
     }
     uNet.segment(capture, gotResult);
   }
+
+  navigator.mediaDevices.getUserMedia({video: false, audio: true})
+    .then(function (stream) {
+        // Success
+        $('#my-video').get(0).srcObject = stream;
+        localStream = stream;
+    }).catch(function (error) {
+        // Error
+        console.error('mediaDevice.getUserMedia() error:', error);
+        return;
+    });
 
   // skywayのインスタンスを作成
   let peer = new Peer({
